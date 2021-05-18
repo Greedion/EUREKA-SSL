@@ -1,13 +1,28 @@
 
 server:
   port: 8081
-
+  ssl:
+    enabled: true
+    key-store: src/main/resources/client.jks
+    key-store-password: 123456
+    key-alias: client
+    protocol: TLS
+    ciphers: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA
 spring:
   application:
     name: client
 
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://localhost:8761/eureka/
+    enabled: true
+  instance:
+      statusPageUrlPath: https://localhost:8761/info
+      healthCheckUrlPath: https://localhost:8761/health
+      leaseRenewalIntervalInSeconds: 10
+      securePort: ${server.port}
+      securePortEnabled: true
+      nonSecurePortEnabled: false
 

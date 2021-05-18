@@ -1,5 +1,15 @@
 server:
   port: 8761
+  ssl:
+    enabled: true
+    key-store: classpath:eureka.jks
+    key-store-password: 123456
+    trust-store: classpath:eureka.jks
+    trust-store-password: 123456
+    key-alias: eureka
+    client-auth: need
+    ciphers: TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA
+    protocol: TLS
 
 spring:
   application:
@@ -8,8 +18,18 @@ spring:
 eureka:
   instance:
     hostname: localhost
+    securePort: ${server.port}
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    secureVirtualHostName: ${spring.application.name}
+    homePageUrl: https://${eureka.instance.hostname}:${server.port}/
+    statusPageUrl: https://${eureka.instance.hostname}:${server.port}/admin/info
+    metadataMap:
+      hostname: ${eureka.instance.hostname}
+      securePort: ${server.port}
   client:
     registerWithEureka: false
     fetchRegistry: false
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      defaultZone: https://${eureka.instance.hostname}:${server.port}/eureka/
+
