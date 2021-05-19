@@ -1,0 +1,35 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.0.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
+
+
+ext {
+    set('springCloudVersion', "Hoxton.SR1")
+}
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile group: 'org.springframework.retry', name: 'spring-retry'
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '11.0.2'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'org.springframework.cloud:spring-cloud-config-server'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

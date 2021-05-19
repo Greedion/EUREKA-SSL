@@ -16,6 +16,7 @@ import org.springframework.cloud.config.client.ConfigClientProperties;
 import org.springframework.cloud.config.client.ConfigServicePropertySourceLocator;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
@@ -34,6 +35,7 @@ public class EurekaDiscoveryApplication {
     ConfigClientProperties properties;
 
 
+    @Primary
     @Bean
     public ConfigServicePropertySourceLocator configServicePropertySourceLocator() throws Exception {
         final char[] password = {'d','r','y','t','c','g','v','h','b','j','k'};
