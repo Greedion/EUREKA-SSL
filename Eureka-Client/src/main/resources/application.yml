@@ -1,20 +1,29 @@
 server:
-  port: 8081
+  port: 8889
   ssl:
     enabled: true
     key-store: src/main/resources/configService.p12
     key-store-password: drytcgvhbjk
     key-alias: configService
+    trust-store: classpath:configService.p12
+    trust-store-password: drytcgvhbjk
     protocol: TLS
 spring:
   application:
     name: client
-
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///c:/sst-cloud-config
+      enabled: true
+  profiles:
+    active: native
 
 eureka:
   client:
     fetch-registry: false
-    register-with-eureka: true
+    register-with-eureka: true # bdo rejestracji w eurece
     serviceUrl:
       defaultZone: https://localhost:8761/eureka/
     enabled: true
@@ -25,4 +34,3 @@ eureka:
       securePort: ${server.port}
       securePortEnabled: true
       nonSecurePortEnabled: false
-

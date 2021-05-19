@@ -4,10 +4,12 @@ import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClientImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
 import org.springframework.context.annotation.Bean;
 
 import java.security.NoSuchAlgorithmException;
 
+@EnableConfigServer
 @SpringBootApplication
 public class EurekaClientApplication {
 

@@ -24,48 +24,12 @@ import javax.net.ssl.SSLContext;
 import java.io.File;
 
 @EnableEurekaServer
-@SpringBootApplication
+@SpringBootApplication(scanBasePackageClasses = {
+        SslConfig.class
+})
 public class EurekaDiscoveryApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(EurekaDiscoveryApplication.class, args);
     }
-
-    @Autowired
-    ConfigClientProperties properties;
-
-
-    @Primary
-    @Bean
-    public ConfigServicePropertySourceLocator configServicePropertySourceLocator() throws Exception {
-        final char[] password = {'d','r','y','t','c','g','v','h','b','j','k'};
-        final File keyStoreFile = new File("src/main/resources/discoveryService.p12");
-        SSLContext sslContext = SSLContexts.custom()
-                .loadKeyMaterial(keyStoreFile, password, password)
-                .loadTrustMaterial(keyStoreFile, password).build();
-        CloseableHttpClient httpClient = HttpClients.custom().setSSLContext(sslContext).build();
-        HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
-        ConfigServicePropertySourceLocator configServicePropertySourceLocator = new ConfigServicePropertySourceLocator(properties);
-        configServicePropertySourceLocator.setRestTemplate(new RestTemplate(requestFactory));
-        return configServicePropertySourceLocator;
-    }
-
-    @Bean
-    public ServletWebServerFactory   tomcatEmbeddedServletContainerFactory() {
-        final TomcatServletWebServerFactory  factory = new TomcatServletWebServerFactory ();
-        factory.addAdditionalTomcatConnectors(this.createConnection());
-        return factory;
-    }
-
-    private Connector createConnection() {
-        final String protocol = "org.apache.coyote.http11.Http11NioProtocol";
-        final Connector connector = new Connector(protocol);
-
-        connector.setScheme("http");
-        connector.setPort(8762);
-        connector.setRedirectPort(8761);
-        return connector;
-    }
-
-
 }
