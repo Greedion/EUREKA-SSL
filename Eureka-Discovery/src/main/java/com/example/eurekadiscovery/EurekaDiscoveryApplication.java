@@ -36,8 +36,8 @@ public class EurekaDiscoveryApplication {
 
     @Bean
     public ConfigServicePropertySourceLocator configServicePropertySourceLocator() throws Exception {
-        final char[] password = {'1','2','3','4','5','6'};
-        final File keyStoreFile = new File("src/main/resources/eureka.jks");
+        final char[] password = {'d','r','y','t','c','g','v','h','b','j','k'};
+        final File keyStoreFile = new File("src/main/resources/discoveryService.p12");
         SSLContext sslContext = SSLContexts.custom()
                 .loadKeyMaterial(keyStoreFile, password, password)
                 .loadTrustMaterial(keyStoreFile, password).build();

@@ -2,9 +2,9 @@ server:
   port: 8081
   ssl:
     enabled: true
-    key-store: src/main/resources/client.jks
-    key-store-password: 123456
-    key-alias: client
+    key-store: src/main/resources/configService.p12
+    key-store-password: drytcgvhbjk
+    key-alias: configService
     protocol: TLS
 spring:
   application:

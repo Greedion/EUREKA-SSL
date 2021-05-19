@@ -2,11 +2,11 @@ server:
   port: 8761
   ssl:
     enabled: true
-    key-store: classpath:eureka.jks
-    key-store-password: 123456
-    trust-store: classpath:eureka.jks
-    trust-store-password: 123456
-    key-alias: eureka
+    key-store: classpath:discoveryService.p12
+    key-store-password: drytcgvhbjk
+    trust-store: classpath:discoveryService.p12
+    trust-store-password: drytcgvhbjk
+    key-alias: discoveryService
     client-auth: need
     protocol: TLS
 
