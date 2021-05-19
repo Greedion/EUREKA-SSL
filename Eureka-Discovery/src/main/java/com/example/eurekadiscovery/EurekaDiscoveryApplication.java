@@ -1,6 +1,9 @@
 package com.example.eurekadiscovery;
 
 import org.apache.catalina.connector.Connector;
+import org.apache.http.conn.ssl.NoopHostnameVerifier;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
@@ -61,8 +64,6 @@ public class EurekaDiscoveryApplication {
         connector.setRedirectPort(8761);
         return connector;
     }
-
-
 
 
 }
