@@ -27,10 +27,13 @@ class SslConfig {
     @Autowired
     ConfigClientProperties properties;
 
+    @Value("${key-store-password:null}")
+    String propertiesPassword;
+
     @Primary
     @Bean
     public ConfigServicePropertySourceLocator configServicePropertySourceLocator() throws Exception {
-        final char[] password = {'d','r','y','t','c','g','v','h','b','j','k'};
+        final char[] password = (propertiesPassword == null) ? System.getenv("SERVICE_PASSWORD").toCharArray() : propertiesPassword.toCharArray();
         final File keyStoreFile = new File("src/main/resources/discoveryService.p12");
         SSLContext sslContext = SSLContexts.custom()
                 .loadKeyMaterial(keyStoreFile, password, password)

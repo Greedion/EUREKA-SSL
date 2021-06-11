@@ -11,19 +11,13 @@ server:
 spring:
   application:
     name: client
-  cloud:
-    config:
-      server:
-        native:
-          search-locations: file:///c:/sst-cloud-config
-      enabled: true
   profiles:
     active: native
 
 eureka:
   client:
     fetch-registry: false
-    register-with-eureka: true # bdo rejestracji w eurece
+    register-with-eureka: true
     serviceUrl:
       defaultZone: https://localhost:8761/eureka/
     enabled: true

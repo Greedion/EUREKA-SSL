@@ -1,10 +1,10 @@
-spring:
-  cloud:
-    config:
-      uri: https://localhost:8889
-      failFast: true
-      retry:
-       max-attempts: 40
-  application:
-    name: discovery
-
+#spring:
+#  cloud:
+#    config:
+#      uri: https://localhost:8889
+#      failFast: true
+#      retry:
+#       max-attempts: 40
+#  application:
+#    name: discovery
+#
